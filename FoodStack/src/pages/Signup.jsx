@@ -10,7 +10,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/users/signup', { name, email, password });
+    await axios.post('https://foodstack-xp5k.onrender.com/api/users/signup', { name, email, password });
     navigate('/login');
   };
 
