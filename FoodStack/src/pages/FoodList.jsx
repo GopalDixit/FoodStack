@@ -10,7 +10,7 @@ const FoodList = () => {
   useEffect(() => {
     if (isAuthenticated) {
       const fetchFoods = async () => {
-        const response = await fetch('http://localhost:5000/api/food');
+        const response = await fetch('https://foodstack-xp5k.onrender.com/api/food');
         const data = await response.json();
         setFoods(data);
       };
