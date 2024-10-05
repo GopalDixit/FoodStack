@@ -86,7 +86,7 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
             <div>
               <p className="font-semibold">{item.name}</p>
               <p className="text-gray-500">
-                Price: ${item.price.toFixed(2)}{' '}
+                Price: ₹{item.price.toFixed(2)}{' '}
                 <span className="text-black">(x{item.quantity})</span>
               </p>
             </div>
