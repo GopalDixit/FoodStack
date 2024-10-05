@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5000/api';
+const baseUrl = 'https://foodstack-xp5k.onrender.com/api';
 
 export const loginUser = async (credentials) => {
   const response = await fetch(`${baseUrl}/auth/login`, {
