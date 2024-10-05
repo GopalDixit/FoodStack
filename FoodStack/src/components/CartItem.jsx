@@ -9,7 +9,7 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
 
   const handlePayment = async (amount) => {
 
-    const URL = 'http://localhost:5000/api/payment/order';
+    const URL = 'https://foodstack-xp5k.onrender.com/api/payment/order';
 
     try {
       setIsLoading(true);
