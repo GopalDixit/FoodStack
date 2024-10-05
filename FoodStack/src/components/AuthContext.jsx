@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState(null);
 
   const login = async (email, password) => {
-    const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password });
+    const { data } = await axios.post('https://foodstack-xp5k.onrender.com/api/users/login', { email, password });
     localStorage.setItem('token', data.token);
     setIsAuthenticated(true);
     setUserRole(data.role);
