@@ -48,7 +48,7 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
       handler: async (response) => {
         console.log("response", response);
         try {
-          const res = await fetch('http://localhost:5000/api/payment/verify', {
+          const res = await fetch('https://foodstack-xp5k.onrender.com/api/payment/verify', {
             method: 'POST',
             headers: {
               'content-type': 'application/json'
