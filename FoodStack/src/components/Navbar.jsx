@@ -45,7 +45,8 @@ const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartIte
               </button>
             </>
           ) : (
-            <Link to="/login" className="text-lg font-bold">Login</Link>
+            <Link to="/login" className="mr-4 text-lg font-serif">Login</Link>
+            <Link to="/signup" className="bg-green-500 px-4 py-2 rounded-lg">Signup</Link>
           )}
         </div>
       </div>
