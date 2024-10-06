@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/solid'; 
 
-const Navbar = () => {
+const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartItemCount as a prop
   const { isAuthenticated, logout, userRole } = useContext(AuthContext);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -28,24 +28,24 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               {userRole === 'admin' && <Link to="/add-food" className="mr-4">Add Food</Link>}
-              <button onClick={logout} className="bg-green-500 px-4 py-2 rounded">Logout</button>
-
-              <button
-                onClick={toggleDarkMode}
-                className=" text-black dark:text-white px-4 py-2 rounded mr-4"
+              <button 
+                onClick={scrollToCart} 
+                className="bg-blue-500 px-4 py-2 rounded-xl relative mr-3"
               >
-                {darkMode ? (
-                  <SunIcon className="h-6 w-6 text-yellow-500" /> 
-                ) : (
-                  <MoonIcon className="h-6 w-6 text-white" /> 
+                Cart
+                {cartItemCount > 0 && (  // Step 2: Show cart item count badge if greater than 0
+                  <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+                    {cartItemCount}
+                  </span>
                 )}
+              </button>
+              <button onClick={logout} className="bg-green-500 px-4 py-2 rounded">Logout</button>
+              <button onClick={toggleDarkMode} className="ml-4">
+                {darkMode ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
               </button>
             </>
           ) : (
-            <>
-              <Link to="/login" className="mr-4 text-lg font-serif">Login</Link>
-              <Link to="/signup" className="bg-green-500 px-4 py-2 rounded-lg">Signup</Link>
-            </>
+            <Link to="/login" className="text-lg font-bold">Login</Link>
           )}
         </div>
       </div>
