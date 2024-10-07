@@ -71,7 +71,9 @@ const FoodList = () => {
           alt="Background"
           className="absolute inset-0 object-cover w-full h-full z-0" 
         />
-        <p className="text-6xl text-white z-10">Please log in to view the food list.</p>
+        <p className="text-6xl text-white mb-4" style={{ fontFamily: 'HarryPotter' }}>
+          Please log in to view the food list.
+        </p>
       </div>
     );
   }
