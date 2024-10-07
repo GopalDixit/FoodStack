@@ -101,7 +101,7 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
       </ul>
 
       <div className="mt-4">
-        <h3 className="text-xl font-semibold">Total: ${total}</h3>
+        <h3 className="text-xl font-semibold">Total: ₹{total}</h3>
       </div>
       {/* Razorpay button */}
       <div className="text-center mt-8">
