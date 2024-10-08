@@ -86,9 +86,9 @@ const FoodList = () => {
         cartItemCount={getTotalItemsInCart()} 
       />
 
-      <h1 className="text-5xl text-center mt-16 mb-6 dark:text-white" style={{ fontFamily: 'Lobster', animation: 'fadeIn 2s', marginTop: 75 }}>
+{/*       <h1 className="text-5xl text-center mt-16 mb-6 dark:text-white" style={{ fontFamily: 'Lobster', animation: 'fadeIn 2s', marginTop: 75 }}>
         Food List
-      </h1>
+      </h1> */}
 
       <div className="flex flex-col sm:flex-row justify-between mb-6">
         <input
