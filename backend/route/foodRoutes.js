@@ -30,4 +30,41 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Update food item
+router.put('/update', verifyToken, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied.' });
+  }
+  const { id, name, image, price, description } = req.body;
+
+  try {
+    const updatedFood = await Food.findByIdAndUpdate(id, { name, image, price, description }, { new: true });
+    if (!updatedFood) {
+      return res.status(404).json({ message: 'Food item not found' });
+    }
+    res.json(updatedFood);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating food item', error });
+  }
+});
+
+// Delete
+router.delete('/:id',verifyToken, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied.' });
+  }
+  const { id } = req.params;
+  try {
+      const foodItem = await Food.findByIdAndDelete(id);
+      
+      if (!foodItem) {
+          return res.status(404).json({ message: 'Food item not found' });
+      }
+      res.status(200).json({ message: 'Food item deleted successfully' });
+      navigate('/');
+  } catch (error) {
+      console.error('Error deleting food item:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 module.exports = router;
