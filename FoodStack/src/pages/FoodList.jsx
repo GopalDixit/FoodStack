@@ -51,7 +51,7 @@ const FoodList = () => {
   };
 
   const getTotalItemsInCart = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);  // Total quantity of items in the cart
+    return cart.reduce((total, item) => total + item.quantity, 0); 
   };
 
   const filteredFoods = foods.filter(food => {
@@ -80,7 +80,7 @@ const FoodList = () => {
     <div className="min-h-screen w-full dark:bg-gray-700 p-4 px-8">
       {/* Pass the total items count to the Navbar */}
       <Navbar 
-        scrollToCart={() => cartRef.current?.scrollIntoView({ behavior: 'smooth' })} 
+        scrollToCart={() => cartRef.current?.scrollIntoView({ behavior: 'auto' })} 
         cartItemCount={getTotalItemsInCart()} 
       />
 
