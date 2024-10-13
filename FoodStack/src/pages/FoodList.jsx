@@ -153,21 +153,21 @@ const FoodList = () => {
                 <p className="text-gray-500 dark:text-gray-400">Price: ₹{food.price.toFixed(2)}</p>
                 <p className="text-gray-700 dark:text-gray-300">{food.description}</p>
                 <button
-                  className="bg-blue-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                  className="bg-blue-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-600"
                   onClick={() => addToCart(food)}
                 >
                   Add to Cart
                 </button>
                 {userRole === 'admin' && (
                   <button
-                    className="bg-green-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                    className="bg-green-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-green-800 dark:bg-green-500 dark:hover:bg-green-600"
                     onClick={() => navigate('/update', { state: { id: food._id, name: food.name, image: food.image, price: food.price, description: food.description } })}>
                     Update
                   </button>
                 )}
                 {userRole === 'admin' && (
                   <button
-                    className="bg-red-500 text-white mt-2 px-2 py-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                    className="bg-red-500 text-white mt-2 px-2 py-2 rounded hover:bg-red-800 dark:bg-red-500 dark:hover:bg-red-600"
                     onClick={() => handleDelete(food._id)}>
                     Delete
                   </button>
