@@ -79,15 +79,15 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
+      <h2 className="text-2xl font-bold mb-4 dark:text-gray-300">Your Cart</h2>
       <ul>
         {cart.map(item => (
           <li key={item._id} className="flex justify-between items-center border-b py-2">
             <div>
-              <p className="font-semibold">{item.name}</p>
-              <p className="text-gray-500">
+              <p className="font-semibold dark:text-gray-300">{item.name}</p>
+              <p className="text-gray-500 dark:text-white">
                 Price: ₹{item.price.toFixed(2)}{' '}
-                <span className="text-black">(x{item.quantity})</span>
+                <span className="text-black dark:text-white font-bold">(x{item.quantity})</span>
               </p>
             </div>
             <button
@@ -101,7 +101,7 @@ const CartItem = ({ cart = [], removeFromCart, total }) => {
       </ul>
 
       <div className="mt-4">
-        <h3 className="text-xl font-semibold">Total: ₹{total}</h3>
+        <h3 className="text-xl font-semibold dark:text-gray-300">Total: ₹{total}</h3>
       </div>
       {/* Razorpay button */}
       <div className="text-center mt-8">
