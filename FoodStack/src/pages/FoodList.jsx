@@ -2,21 +2,23 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import CartItem from '../components/CartItem';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const FoodList = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, userRole } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [cart, setCart] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const navigate = useNavigate();
 
   const cartRef = useRef(null);
 
   useEffect(() => {
     if (isAuthenticated) {
       const fetchFoods = async () => {
-        const response = await fetch('https://foodstack-xp5k.onrender.com/api/food');
+        const response = await fetch('http://localhost:5000/api/food');
         const data = await response.json();
         setFoods(data);
       };
@@ -37,6 +39,31 @@ const FoodList = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this food item?')) {
+        try {
+            const response = await fetch(`http://localhost:5000/api/food/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+                },
+            });
+
+            if (response.ok) {
+                alert('Food item deleted successfully!');
+                setFoods((prevFoods) => prevFoods.filter(food => food._id !== id));
+                navigate('/')
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.message}`);
+            }
+        } catch (error) {
+            console.error('Error deleting food:', error);
+            alert('An error occurred while deleting. Please try again.');
+        }
+    }
+};
+
   const removeFromCart = (food) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.map(item =>
@@ -51,7 +78,7 @@ const FoodList = () => {
   };
 
   const getTotalItemsInCart = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0); 
+    return cart.reduce((total, item) => total + item.quantity, 0);
   };
 
   const filteredFoods = foods.filter(food => {
@@ -67,21 +94,18 @@ const FoodList = () => {
         <img
           src="https://c4.wallpaperflare.com/wallpaper/495/760/53/cuisine-food-india-indian-wallpaper-preview.jpg"
           alt="Background"
-          className="absolute inset-0 object-cover w-full h-full z-0" 
+          className="absolute inset-0 object-cover w-full h-full z-0"
         />
-        <p className="text-6xl text-white mb-4 z-10" style={{ fontFamily: 'HarryPotter' }}>
-          Please log in to view the food list.
-        </p>
+        <p className="text-6xl text-white z-10">Please log in to view the food list.</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen w-full dark:bg-gray-700 p-4 px-8">
-      {/* Pass the total items count to the Navbar */}
-      <Navbar 
-        scrollToCart={() => cartRef.current?.scrollIntoView({ behavior: 'auto' })} 
-        cartItemCount={getTotalItemsInCart()} 
+      <Navbar
+        scrollToCart={() => cartRef.current?.scrollIntoView({ behavior: 'auto' })}
+        cartItemCount={getTotalItemsInCart()}
       />
 
       <h1 className="text-5xl text-center mt-16 mb-6 dark:text-white" style={{ fontFamily: 'Lobster', animation: 'fadeIn 2s', marginTop: 75 }}>
@@ -92,7 +116,7 @@ const FoodList = () => {
         <input
           type="text"
           placeholder="Search for food..."
-          className="border p-2 rounded mb-4 sm:mb-0 sm:mr-4 dark:bg-gray-800 dark:text-white" 
+          className="border p-2 rounded mb-4 sm:mb-0 sm:mr-4 dark:bg-gray-800 dark:text-white"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -100,14 +124,14 @@ const FoodList = () => {
           <input
             type="number"
             placeholder="Min Price"
-            className="border p-2 rounded mr-4 dark:bg-gray-800 dark:text-white" 
+            className="border p-2 rounded mr-4 dark:bg-gray-800 dark:text-white"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
           />
           <input
             type="number"
             placeholder="Max Price"
-            className="border p-2 rounded dark:bg-gray-800 dark:text-white" 
+            className="border p-2 rounded dark:bg-gray-800 dark:text-white"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
           />
@@ -127,11 +151,25 @@ const FoodList = () => {
                 <p className="text-gray-500 dark:text-gray-400">Price: ₹{food.price.toFixed(2)}</p>
                 <p className="text-gray-700 dark:text-gray-300">{food.description}</p>
                 <button
-                  className="bg-blue-500 text-white mt-2 px-4 py-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                  className="bg-blue-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
                   onClick={() => addToCart(food)}
                 >
                   Add to Cart
                 </button>
+                {userRole === 'admin' && (
+                  <button
+                    className="bg-green-500 text-white mt-2 px-2 py-2 mr-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                    onClick={() => navigate('/update', { state: { id: food._id, name: food.name, image: food.image, price: food.price, description: food.description } })}>
+                    Update
+                  </button>
+                )}
+                {userRole === 'admin' && (
+                  <button
+                    className="bg-red-500 text-white mt-2 px-2 py-2 rounded hover:bg-blue-600 dark:bg-red-500 dark:hover:bg-red-600"
+                    onClick={() => handleDelete(food._id)}>
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))
