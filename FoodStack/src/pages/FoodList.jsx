@@ -1,5 +1,3 @@
-//         const response = await fetch('https://foodstack-xp5k.onrender.com/api/food');
-
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import CartItem from '../components/CartItem';
