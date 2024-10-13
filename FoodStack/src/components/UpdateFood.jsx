@@ -68,6 +68,7 @@ const UpdateFood = () => {
                     className="border p-2 w-full"
                     required
                 />
+                <img src={food.image}></img>
                 <input
                     type="text"
                     name="image"
