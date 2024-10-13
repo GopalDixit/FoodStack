@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './components/AuthContext';
 import AddFood from './components/AddFood';
+import UpdateFood from './components/UpdateFood';
 import CartItem from './components/CartItem';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/add-food" element={<AddFood />} />
+          <Route path="/update" element={<UpdateFood />} />
           <Route path="/cartitem" element={<CartItem />} />
 
         </Routes>
