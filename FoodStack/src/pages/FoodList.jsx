@@ -90,7 +90,7 @@ const FoodList = () => {
   });
 
   if (!isAuthenticated) {
- return (
+    return (
       <div className="flex justify-center items-center min-h-screen relative w-full h-full">
         <Login/>
       </div>
