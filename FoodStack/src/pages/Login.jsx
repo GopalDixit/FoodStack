@@ -48,6 +48,11 @@ const Login = () => {
             required
           />
           <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded w-full">Login</button>
+          <button
+            onClick={() => navigate('/signup')} 
+            className="text-white mt-4 w-full underline">
+            Don't have an account? Sign up
+          </button>
         </form>
       </div>
     </div>
