@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/solid'; 
+import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 
-const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartItemCount as a prop
+const Navbar = ({ scrollToCart, cartItemCount }) => {
   const { isAuthenticated, logout, userRole } = useContext(AuthContext);
   const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (darkMode) {
@@ -28,12 +29,12 @@ const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartIte
           {isAuthenticated ? (
             <>
               {userRole === 'admin' && <Link to="/add-food" className="mr-4">Add Food</Link>}
-              <button 
-                onClick={scrollToCart} 
+              <button
+                onClick={scrollToCart}
                 className="bg-blue-500 px-4 py-2 rounded-xl relative mr-3"
               >
                 Cart
-                {cartItemCount > 0 && (  // Step 2: Show cart item count badge if greater than 0
+                {cartItemCount > 0 && (
                   <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
                     {cartItemCount}
                   </span>
@@ -50,6 +51,7 @@ const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartIte
                 "Good food is the foundation of genuine happiness."
               </p>
             </div>
+
           )}
         </div>
       </div>
