@@ -45,10 +45,11 @@ const Navbar = ({ scrollToCart, cartItemCount }) => {  // Step 1: Accept cartIte
               </button>
             </>
           ) : (
-            <>
-              <Link to="/login" className="mr-4 text-lg font-serif">Login</Link>
-              <Link to="/signup" className="bg-green-500 px-4 py-2 rounded-lg">Signup</Link>
-            </>
+            <div className='z-0'>
+              <p className="text-lg font-serif italic text-gray-100">
+                "Good food is the foundation of genuine happiness."
+              </p>
+            </div>
           )}
         </div>
       </div>
