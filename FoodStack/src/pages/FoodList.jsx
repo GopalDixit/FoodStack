@@ -3,6 +3,7 @@ import { AuthContext } from '../components/AuthContext';
 import CartItem from '../components/CartItem';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import Login from './Login';
 
 const FoodList = () => {
   const { isAuthenticated, userRole } = useContext(AuthContext);
