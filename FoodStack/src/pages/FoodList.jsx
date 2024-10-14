@@ -89,16 +89,9 @@ const FoodList = () => {
   });
 
   if (!isAuthenticated) {
-    return (
+ return (
       <div className="flex justify-center items-center min-h-screen relative w-full h-full">
-        <img
-          src="https://c4.wallpaperflare.com/wallpaper/495/760/53/cuisine-food-india-indian-wallpaper-preview.jpg"
-          alt="Background"
-          className="absolute inset-0 object-cover w-full h-full z-0"
-        />
-        <p className="text-6xl text-white mb-4 z-10" style={{ fontFamily: 'HarryPotter' }}>
-          Please log in to view the food list.
-        </p>
+        <Login/>
       </div>
     );
   }
