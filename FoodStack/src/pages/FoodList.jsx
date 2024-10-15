@@ -19,7 +19,7 @@ const FoodList = () => {
   useEffect(() => {
     if (isAuthenticated) {
       const fetchFoods = async () => {
-        const response = await fetch('http://localhost:5000/api/food');
+        const response = await fetch('https://foodstack-xp5k.onrender.com/api/food');
         const data = await response.json();
         setFoods(data);
       };
@@ -43,7 +43,7 @@ const FoodList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this food item?')) {
         try {
-            const response = await fetch(`http://localhost:5000/api/food/${id}`, {
+            const response = await fetch(`https://foodstack-xp5k.onrender.com/api/food/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`, 
