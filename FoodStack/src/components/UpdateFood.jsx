@@ -29,7 +29,7 @@ const UpdateFood = () => {
         setSuccess('');
 
         try {
-            const response = await fetch(`http://localhost:5000/api/food/update`, { 
+            const response = await fetch(`https://foodstack-xp5k.onrender.com/api/food/update`, { 
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
