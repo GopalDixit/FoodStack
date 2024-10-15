@@ -17,7 +17,7 @@ const AddFood = () => {
     e.preventDefault();
     
     try {
-        const response = await fetch('http://localhost:5000/api/food', { 
+        const response = await fetch('https://foodstack-xp5k.onrender.com/api/food', { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
